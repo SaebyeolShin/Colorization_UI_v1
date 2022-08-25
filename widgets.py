@@ -14,7 +14,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-
 class Filter(QWidget):
     def __init__(self, main):
         super().__init__()
@@ -29,7 +28,6 @@ class Filter(QWidget):
         self.cartoon_btn1 = self.findChild(QPushButton, "cartoon_btn2")
         self.invert_btn = self.findChild(QPushButton, "invert_btn")
         self.bypass_btn = self.findChild(QPushButton, "bypass_btn")
-
 
         self.y_btn = self.findChild(QPushButton, "y_btn")
         self.y_btn.setIcon(QIcon(f"{pathlib.Path(__file__).parent.absolute()}/icon/check.png"))
@@ -48,8 +46,6 @@ class Filter(QWidget):
         self.cartoon_btn1.clicked.connect(lambda _: self.click_cartoon1())
         self.invert_btn.clicked.connect(lambda _: self.click_invert())
         self.bypass_btn.clicked.connect(lambda _: self.click_bypass())
-
-
 
     def click_contrast(self):
         self.img_class.auto_contrast()
@@ -239,7 +235,6 @@ class Adjust(QWidget):
         hflip_ct = 2
 
         self.frame.setParent(None)
-        
         self.vbox.addWidget(crop_frame.frame)
         self.zoom_factor = self.get_zoom_factor()
 
@@ -424,15 +419,12 @@ class Ai(QWidget):
         super().__init__()
         uic.loadUi(f"{pathlib.Path(__file__).parent.absolute()}/ui/ai_frame.ui", self)
 
-        # self.get_zoom_factor = main.get_zoom_factor
+        self.get_zoom_factor = main.get_zoom_factor
         self.img_class, self.update_img, self.base_frame, self.rb, self.vbox, self.zoom_factor = \
             main.img_class, main.update_img, main.base_frame, main.rb, main.vbox, main.zoom_factor
 
-        self.main = main
-        self.main.scene = main.scene
-
         self.frame = self.findChild(QFrame, "frame")
-        self.get_ref_btn = self.findChild(QPushButton, "get_ref_btn")
+
         self.face_btn = self.findChild(QPushButton, "face_btn")
         self.face_btn.clicked.connect(lambda _: self.click_face())
         self.face_counter, self.face_cord = 0, None
@@ -448,65 +440,6 @@ class Ai(QWidget):
 
         self.y_btn.clicked.connect(self.click_y)
         self.n_btn.clicked.connect(self.click_n)
-
-        self.get_ref_btn.clicked.connect(lambda _: self.click_get_ref())
-        # self.get_ref_btn.clicked.connect(self.click_get_ref)
-        # self.files, self.main_window = None, None
-
-
-    def click_get_ref(self):
-        files, _ = QFileDialog.getOpenFileNames(self, "Choose Image File", "",
-                                                "Image Files (*.jpg *.png *.jpeg *.ico);;All Files (*)")
-        if files:
-            # widget2 = QWidget()
-            self.files = files
-            # self.close()
-
-            # self.img_class.img_copy = deepcopy(self.img_class.img)
-
-            # self.image_main = QLabel()
-            # self.image.setPixmap(self.img_class.img_copy)
-            # self.img_class.reset()
-            # self.lbl = QLabel(self)
-            # self.lbl.resize(300,300)
-
-            # layout_box = QHBoxLayout(widget2)
-            # layout_box.setContentsMargins(0, 0, 0, 0)
-            # layout_box.addWidget(self.img_main)
-            
-            
-            # hbox = QHBoxLayout()
-            # pixmap2 = QPixmap(files)
-            # self.image2 = QLabel(self)
-            # self.image2.setPixmap(pixmap2)
-            # self.image2.setFixedSize(pixmap2.size())
-            
-            # hbox.addWidget(self.image2)
-            # p = self.geometry().topRight() - self.image2.geometry().topRight() - QPoint(100, 100)
-            # self.image2.move(p)
-            # print(type(self.files))
-            self.img_list, self.rb = [], None
-
-            for f in files:
-                self.img_list.append(Images(f))
-                print(type(Images(f)))
-                print(Images(f))
-            
-            self.img_id = 0
-            self.img_class = self.img_list[self.img_id]
-            self.img = QPixmap(qimage2ndarray.array2qimage(cv2.cvtColor(self.img_class.img, cv2.COLOR_BGR2RGB)))
-
-            #self.img.save('./sample_videos/ref/taxi/')
-            
-            self.img = self.img.scaled(250,250)
-            self.scene_img = self.main.scene.addPixmap(self.img)
-            
-            # if movable:
-            #     self.scene_img.setFlag(QGraphicsItem.ItemIsMovable)
-            # else:
-            #     self.fitInView()
-
-
 
     def click_face(self):
         face_frame = Face(self)
@@ -532,29 +465,6 @@ class Ai(QWidget):
         self.update_img()
         self.vbox.addWidget(self.base_frame)
         self.rb.close()
-
-
-
-# class RefImage(QWidget):
-#     def __init__(self, ai_class):
-#         super().__init__()
-#         uic.loadUi(f"{pathlib.Path(__file__).parent.absolute()}/ui/get_ref_btn.ui", self)
-
-#         self.get_ref_btn = self.findChild(QPushButton, "get_ref_btn")
-#         self.get_ref_btn.clicked.connect(self.click_get_ref)
-#         self.files, self.main_window = None, None
-
-
-#     def click_get_ref(self):
-#         files, _ = QFileDialog.getOpenFileNames(self, "Choose Image File", "",
-#                                                 "Image Files (*.jpg *.png *.jpeg *.ico);;All Files (*)")
-#         if files:
-#             self.files = files
-#             self.close()
-#             self.main_window = Ai(self.files) 
-#             self.main_window.show()
-
-
 
 class Face(QWidget):
     def __init__(self, ai_class):

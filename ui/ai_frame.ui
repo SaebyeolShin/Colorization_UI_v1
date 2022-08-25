@@ -92,7 +92,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="colorize_btn">
+         <widget class="QPushButton" name="get_ref_btn">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -114,12 +114,12 @@
            </font>
           </property>
           <property name="text">
-           <string/>
+           <string>Get Reference Image</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="cartoon_btn">
+         <widget class="QPushButton" name="nathing">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>

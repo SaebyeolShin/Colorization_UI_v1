@@ -4,3 +4,6 @@ Then, download the pretrained models from [this link](https://facevc.blob.core.w
 
 - `video_moredata_l1` under the `checkpoints` folder
 - `vgg19_conv.pth` and `vgg19_gray.pth` under the `data` folder
+
+## Usage
+`python main.py`

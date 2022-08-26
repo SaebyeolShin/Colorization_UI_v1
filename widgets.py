@@ -661,9 +661,8 @@ class Ai(QWidget):
                 print("error when colorizing the video " + ref_name)
                 print(error)
 
-
-        # self.converted_img = QPixmap(qimage2ndarray.array2qimage(cv2.cvtColor("./sample_videos/output/frames_ref/target_0.png", cv2.COLOR_BGR2RGB)))
-        # self.main.scene.addPixmap(self.converted_img)
+        self.pixmap = QPixmap("./sample_videos/output/frames_ref/target_0.png")
+        self.converted_img = self.main.scene.addPixmap(self.pixmap)
 
         
     def click_get_ref(self):

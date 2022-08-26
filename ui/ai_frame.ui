@@ -87,7 +87,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Colorize</string>
+           <string>Face</string>
           </property>
          </widget>
         </item>
@@ -119,7 +119,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="nathing">
+         <widget class="QPushButton" name="colorize_btn">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -141,7 +141,7 @@
            </font>
           </property>
           <property name="text">
-           <string/>
+           <string>Colorize</string>
           </property>
          </widget>
         </item>

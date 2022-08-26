@@ -18,8 +18,21 @@ class Start(QWidget):
     def on_click(self):
         files, _ = QFileDialog.getOpenFileNames(self, "Choose Image File", "",
                                                 "Image Files (*.jpg *.png *.jpeg *.ico);;All Files (*)")
+        
         if files:
             self.files = files
+
+            self.img_list, self.rb = [], None
+
+            for f in files:
+                self.img_list.append(Images(f))
+                print(type(Images(f)))
+                print(Images(f))
+            self.img_id = 0
+            self.img_class = self.img_list[self.img_id]
+            self.img = QPixmap(qimage2ndarray.array2qimage(cv2.cvtColor(self.img_class.img, cv2.COLOR_BGR2RGB)))
+            self.img.save('./sample_videos/frames/target_0.png')
+
             self.close()
             self.main_window = Main(self.files) 
             self.main_window.show()
